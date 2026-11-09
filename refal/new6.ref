@@ -1,0 +1,36 @@
+	ENTRY go
+	EXTRN card, prout
+
+go = <PROUT 'START_OF_WORK'> <main1 <card> > <PROUT 'END_OF_WORK'>
+
+main1
+	'const 'e1'; 'e2   =   <main2 <pars ()()e1>()e2 >
+
+pars
+	(e1)(eA(e2)eB)e2'='e4', 'e5   =   <pars (e1'PEREOPISANIE_CONSTANTI 'e2'=...;\n')(eA(e2)eB)e5>
+	(e1)(e2)e3'='e4', 'e5         =   <pars (e1)(e2(e3))e5>
+	(e1)(eA(e2)eB)e2'='e4         =   (e1'PEREOPISANIE_CONSTANTI 'e2'=...;\n')(eA(e2)eB)
+	(e1)(e2)e3'='e4               =   (e1)(e2(e3))
+	
+main2
+	(e1)(e2)(e3)e4':='e5'; 'e6    =    <main2 <f2 <f1 (e1)(e2)(e3)e5 >e4 >e6 >
+	(e1)(e2)(e3)e4':='e5          =    <ext <f2 <f1 (e1)(e2)(e3)e5 >e4 > >
+
+f1
+	(e1)(e2)(e3)e(D)4       =   (e1)(e2)(e3)
+	(e1)(eA(e2)eB)(e3)e2    =   (e1)(eA(e2)eB)(e3)
+	(e1)(e2)(eA(e3)eB)e3    =   (e1)(e2)(eA(E3)eB)
+	(e1)(e2)(e3)e4          =   (e1'PRISVAIVANIE_NEIZVESTNOGO ...:='e4';\n')(e2)(e3)
+
+f2
+	(e1)(e2)(e3)e(D)4       =   (e1'PRISVAIVANIE_CHISLU 'e4':=...;\n')(e2)(e3)
+	(e1)(eA(e2)eB)(e3)e2    =   (e1'PRISVAIVANIE_CONSTANTE 'e2':=...;\n')(eA(e2)eB)(e3)
+	(e1)(e2)(eA(e3)eB)e3    =   (e1)(e2)(eA(e3)eB)
+	(e1)(e2)(e3)e4          =   (e1)(e2)(e3(e4))
+
+ext
+	()(e2)(e3)     =   <PROUT 'OK'> <PROUT (e2)(e3)>
+	(e1)(e2)(e3)   =   <PROUT e1(e2)(e3)>
+
+* const c1=1, c2=2, c3=3; a:=c1; b:=a; c:=b; c:=c2; d:=4; d:=c3; a:=c2
+* const c1=1, c2=2; c1:=10; c:=d; 3:=c2

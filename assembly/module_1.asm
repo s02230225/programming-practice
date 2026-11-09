@@ -1,0 +1,20 @@
+INCLUDE settings.inc
+PUBLIC check
+.CODE
+check PROC
+	PUSH EBP
+	MOV EBP, ESP
+	MOV EAX, [EBP+8]
+	CMP EAX, [EBP+12]
+	JGE MRK
+	XCHG EAX, [EBP+12]
+	XCHG EAX, [EBP+8]
+	MOV EAX, 1
+	JMP EXT
+MRK:
+	MOV EAX, -1
+EXT:
+	POP EBP
+	RET 8
+check ENDP
+END

@@ -1,0 +1,30 @@
+ ENTRY go
+ EXTRN card, prout
+go = <main1 <card>>
+main1
+	'const'e1'; 'e2 = <main2 ()(<pars e1>)()e2 >
+	e1 = '#ERR1#' <PROUT e1>
+pars
+	e1'='e2','e3 = (e1)<pars e3>
+	e1'='e2 = (e1)
+	e1 = '#ERR2#' <PROUT e1>
+main2
+	(e1)(e2)(e3)e4':='e5'; 'e6 = <main2 <f2 <f1 (e1)(e2)(e3)e5>e4>e6>
+	(e1)(e2)(e3)e4':='e5 s(';')A = <ext <f2 <f1 (e1)(e2)(e3)e5>e4>>
+	e1 = '#ERR3#' <PROUT e1>
+f1
+	(e1)(e2)(e3)e(D)4 = (e1)(e2)(e3)
+	(e1)(eA(e2)eB)(e3)e2 = (e1)(eA(e2)eB)(e3)
+	(e1)(e2)(eA(e3)eB)e3 = (e1)(e2)(eA(E3)eB)
+	(e1)(e2)(e3)e4 = (e1'PRISVAIVANIE_NEIZVESTNOGO ...:='e4';\n')(e2)(e3)
+	e1 = '#ERR4#' <PROUT e1>
+f2
+	(e1)(e2)(e3)e(D)4 = (e1'PRISVAIVANIE_CHISLU 'e4':=...;\n')(e2)(e3)
+	(e1)(eA(e2)eB)(e3)e2 = (e1'PRISVAIVANIE_CONSTANTE 'e2':=...;\n')(e2)(e3)
+	(e1)(e2)(eA(E3)eB)e3 = (e1)(e2)(e3)
+	(e1)(e2)(e3)e4 = (e1)(e2)(e3(e4))
+	e1 = '#ERR5#' <PROUT e1>
+ext
+	()(e2)(e3) = <PROUT 'OK'>
+	(e1)(e2)(e3) = <PROUT e1>
+	e1 = '#ERR6#' <PROUT e1>

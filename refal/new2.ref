@@ -1,0 +1,40 @@
+	entry go
+	extrn first, last, lengw
+	extrn add, sub, mul, div, dr
+	extrn print, prout, card
+go = <main1<prout 'INPUT: '> <card>>
+
+main1
+	'const' e1 ';' e2   =   <main3 (' '<pars1 e1>' ') (' ') ' '<pars2 e2>' '>
+
+pars1
+	e(' ')1 s(L)2 e(LD)3 e(' ')4 '=' e(' ')5 s(D)6 e(D)7 e(' ')8 ',' e9   =   s2 e3 '=' s6 e7 ' ' <pars1 e9>
+	e(' ')1 s(L)2 e(LD)3 e(' ')4 '=' e(' ')5 s(D)6 e(D)7 e(' ')8 	      =   s2 e3 '=' s6 e7
+	e1 = 'ERROR_1!!!' e1
+
+pars2
+	e(' ')1 s(L)2 e(LD)3 e(' ')4 ':=' e(' ')5 s(LD)6 e(LD'+-')7 e(' ')8 ';' e9   =   s2 e3 '=' s6 e7 ' ' <pars2 e9>
+	e(' ')1 s(L)2 e(LD)3 e(' ')4 ':=' e(' ')5 s(LD)6 e(LD'+-')7 e(' ')8	    =   s2 e3 '=' s6 e7
+	e1 = 'ERROR_2!!!' e1
+
+hitrost
+	eB ' ' e(DL)1 '=' e1 s('+-')A e2 = e1 '=' e1 ' ' <hitrost eB ' ' e1 '=' e2>
+	eB ' ' e(DL)1 '=' e3 s('+-')A e2 = eB ' ' <hitrost e1 '=' e3 ' ' e1 '=' e2>
+	e1 = e1
+
+main3
+	(e1) (e2) eB ' ' e(DL)3 '=' e4 s('+-')A e5 ' ' e6 = <main3 (e1) (e2) eB ' ' <PROUT '!' e3 '=' e4 sA e5> <hitrost e3 '=' e4 sA e5> ' ' e6>
+	(e1) (e2) ' ' e3 '=' e4 ' ' e5   =   <PROUT (e1) (e2) ' ' e3 '=' e4 ' ' e5> <main3 <main2 (e1) (e2) ' ' e3 '=' e4 ' '> e5>
+	(e1) (e2) ' ' 		         =   'END_WITH_OK!!! Const:' e1 '; Value:' e2
+	e1 = 'ERROR!!!' e1
+
+main2
+	(eA ' ' e3 '=' eB) (e2) ' ' e3 '=' e4 ' '          =   'ERROR_PRISVAIVANIE_CONSTANTE:' (eA ' ' e3 '=' eB) (e2) ' ' e3 '=' e4 ' '
+	(e1) (e2) ' ' e3 '=' e(D)4 ' '                     =   (e1) <adm (e2) ' ' e3 '=' e4> ' '
+	(e1) (eA ' ' e4 '=' eB ' ' eC) ' ' e3 '=' e4 ' '   =   (e1) <adm (eA ' ' e4 '=' eB ' ' eC) ' ' e3 '=' eB> ' ' 
+	(eA ' ' e4 '=' eB ' ' eC) (e2) ' ' e3 '=' e4 ' '   =   (eA ' ' e4 '=' eB ' ' eC) <adm (e2) ' ' e3 '=' eB> ' '
+	(e1) (e2) ' ' e3 '=' e4 ' ' e5                     =   'ERROR_PRISVAIVANIE_CONSTANTE:' (e1) (e2) ' ' e3 '=' e4 ' ' e5
+
+adm
+	(eA ' ' e2 '=' eB ' ' eC) ' ' e2 '=' e3   =   (eA ' ' e2 '=' e3 ' ' eC)
+	(e1) ' ' e2 '=' e3                        =   (e1 e2 '=' e3 ' ')

@@ -1,0 +1,26 @@
+	entry go
+	extrn print, prout, card
+
+go = <main1 <card>>
+
+main1
+	'const' e1 ';' e2 = <main3 <main2 (' '<pars e1>' ') (' ') ' '<pars e2>' '>>
+
+pars
+	e(' ')1 s(L)2 e(LD)3 e(' ')4 '=' e(' ')5 s(LD)6 e(LD)7 e(' ')8 ',' e9 = s2 e3 '=' s6 e7 ' ' <pars e9>
+	e(' ')1 s(L)2 e(LD)3 e(' ')4 '=' e(' ')5 s(LD)6 e(LD)7 e(' ')8 = s2 e3 '=' s6 e7
+	e1 = 'ERROR_1!!!'
+
+
+adm
+	(eA ' ' e2 '=' eB ' ' eC) ' ' e2 '=' e3 = (eA ' ' e2 '=' e3 ' ' eC)
+	(e1) ' ' e2 '=' e3 = (e1 e2 '=' e3 ' ')
+
+repl
+	(e1 ' ' e2 '=' e3 ' ' e4) e
+
+main2
+	
+
+main3
+	
